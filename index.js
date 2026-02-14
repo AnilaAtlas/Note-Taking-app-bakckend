@@ -14,7 +14,13 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ Database connection error:", err));
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://note-taking-app-frontend-delta.vercel.app' 
+  ],
+  credentials: true
+}));
 app.use(express.json());
 app.use("/api/v1/noteapp", note_routes);
 app.listen(port, () => {
