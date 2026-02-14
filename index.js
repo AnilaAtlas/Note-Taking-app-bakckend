@@ -17,9 +17,12 @@ mongoose
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://note-taking-app-frontend-delta.vercel.app' 
+    'https://note-taking-app-frontend-delta.vercel.app',
+    'https://note-taking-app-frontend-ri1zoohcg-anila-atlas-projects.vercel.app',
   ],
-  credentials: true
+  credentials: true,
+   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 app.use("/api/v1/noteapp", note_routes);
