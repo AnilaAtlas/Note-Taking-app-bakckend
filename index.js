@@ -38,7 +38,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options('*', (req, res) => {
+app.options('/', (req, res) => {
   console.log('Preflight OPTIONS for:', req.originalUrl, 'headers:', req.headers['access-control-request-headers']);
   res.header('Access-Control-Allow-Origin', req.headers.origin || corsOptions.origin[0]);
   res.header('Access-Control-Allow-Methods', corsOptions.methods.join(','));
