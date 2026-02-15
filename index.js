@@ -44,6 +44,14 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options('/', cors(corsOptions));
 app.use(express.json());
+
+app.post('/createnote', (req, res) => {
+  res.redirect(307, '/api/v1/noteapp/createnote');
+});
+
+app.get('/getnotes', (req, res) => {
+  res.redirect(307, '/api/v1/noteapp/getnotes');
+});
 app.get('/', (req, res) => {
   res.json({ message: 'EchoNote API is running!' });
 });
@@ -61,4 +69,18 @@ app.use((req, res, next) => {
 app.listen(port, () => {
   console.log(`server is running on port: ${port}`);
   console.log('Allowed origins:', allowedOrigins);
+});
+
+// Add this temporarily to see all registered routes
+app.get('/debug/routes', (req, res) => {
+  const routes = [];
+  app._router.stack.forEach(middleware => {
+    if (middleware.route) {
+      routes.push({
+        path: middleware.route.path,
+        methods: Object.keys(middleware.route.methods)
+      });
+    }
+  });
+  res.json(routes);
 });
